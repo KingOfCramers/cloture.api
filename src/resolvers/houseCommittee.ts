@@ -11,8 +11,8 @@ export class HouseCommitteeResolver {
     @Arg("input") { minDate, maxDate, skip, limit }: CommitteeInput
   ): Promise<HouseCommittee[]> {
     const query = HouseCommitteeModel.find({});
-    // minDate && query.where("date").gte(minDate);
-    // maxDate && query.where("date").lte(maxDate);
+    minDate && query.where("date").gte(minDate);
+    maxDate && query.where("date").lte(maxDate);
     const res = await query.skip(skip).limit(limit).exec();
     return res;
   }
@@ -35,8 +35,8 @@ export class HouseCommitteeResolver {
     const query = HouseCommitteeModel.find({});
     // Conditionally build up query...
     title && query.where("title").equals(new RegExp(title, "gi"));
-    // minDate && query.where("date").gte(minDate);
-    // maxDate && query.where("date").lte(maxDate);
+    minDate && query.where("date").gte(minDate);
+    maxDate && query.where("date").lte(maxDate);
     link && query.where("link").equals(link);
     text && query.where("text").equals(new RegExp(text, "gi"));
     location && query.where("location").equals(new RegExp(location, "gi"));
