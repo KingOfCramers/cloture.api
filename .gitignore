@@ -1,7 +1,13 @@
+# Development
 dist
 build
 node_modules
 .env.*
 
+# Miscellaneous
+.DS_Store
+
 # Ignore terraform configuration files
 .terraform
+terraform.tfstate
+terraform.tfstate.backup
