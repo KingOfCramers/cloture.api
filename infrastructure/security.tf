@@ -1,5 +1,5 @@
 resource "aws_security_group" "cloture" {
-  name   = "allow-all-sg"
+  name   = "SSH + Port 3005 for API"
   vpc_id = aws_vpc.main.id
 
   ingress {

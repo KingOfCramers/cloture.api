@@ -36,7 +36,9 @@ This is the backend for Cloture. It's a GraphQL API that serves up content for c
 
 1. `ssh -i ~/.ssh/your_public_key ubuntu@ip_address_from_terraform_apply_step`
 2. `echo "MONGODB_URI=yourconnectionstring" > .env.production`
-3. `docker run -dit --env NODE_ENV=production --env-file .env.production -p 3005:3005 your_docker_name/cloture_backend:latest`
+3. `docker run -dit --env NODE_ENV=production --env-file .env.production -p 3005:3005 your_docker_name/cloture_backend:latest`\*\*
+
+You may have to whitelist the IP address of the EC2 instance within your MongoDB managed server.
 
 ## Environment
 
