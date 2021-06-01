@@ -1,4 +1,4 @@
-FROM node:14
+FROM node:15.2.0
 LABEL maintainer="kingofcramers.dev@gmail.com"
 WORKDIR /app
 
@@ -10,3 +10,4 @@ COPY src ./src
 RUN npm run prod:build
 
 CMD ["node", "build/index.js"]
+EXPOSE 3005
