@@ -4,12 +4,12 @@ resource "aws_key_pair" "ssh-key" {
 }
 
 resource "aws_instance" "cloture" {
-  ami               = var.instance_ami
-  instance_type     = var.instance_type
-  availability_zone = var.availability_zone
-  security_groups   = [aws_security_group.cloture.id]
+  ami                         = var.instance_ami
+  instance_type               = var.instance_type
+  availability_zone           = var.availability_zone
+  security_groups             = [aws_security_group.cloture.id]
   associate_public_ip_address = true
-  subnet_id         = aws_subnet.cloture.id
+  subnet_id                   = aws_subnet.cloture.id
 
   key_name = "ssh-key"
 
