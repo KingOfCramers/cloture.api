@@ -9,28 +9,39 @@ This [Apollo](https://www.apollographql.com/) server performs two functions:
 
 ## Development
 
-1. `npm install`
-2. `npm run dev:start`
+1. ```
+    cat << EOF > .development.env
+    MONGODB_URI=[your_local_mongodb_uri]
+    MONGODB_USER=[your_user]
+    MONGODB_PASS=[your_password]
+    EOF
+   ```
+
+2. `npm install`
+3. `npm run dev:start`
 
 ## Production
 
-We're creating our infrastructure for the API with terraform and AWS. You'll need to configure the `availability_zone` and `your_public_key` inside the `infrastructure/variables.tf` file. These will specify where your EC2 instance will get created, and how you'll connect over SSH.
+#### Build Docker Image
 
-You'll also need to ensure that you have a valid AWS credentials file that's referenced in the `main.tf` file.
+1. `docker build -t your_docker_name/cloture_backend:latest .`
+2. `docker push your_docker_name/cloture_backend:latest`
+
+#### Configure Terraform
+
+1. Configure the `availability_zone` and `your_public_key` inside the `infrastructure/variables.tf` file.
+2. Configure valid AWS credentials file at `~/.aws/credentials` for local deployment.
+
+#### Deploy the infrastructure to AWS
 
 1. `cd infrastructure && terraform init`
 2. `terraform apply --auto-approve`
 
-Now that we've got the infrastructure built, we'll need to build the Docker image:
+#### Connect to EC2 + Run Docker Container (port 3005 will be exposed)
 
-1. `docker build `
-
-The previous command should output the IP address of your EC2 instance. Connect to it and run the Docker image:
-
-3. `ssh -i ~/.ssh/your_public_key ubuntu@ip_address_from_apply`
-4. Create the `.env.production` file with your configuration options for the server. See the "Environment" section.
-5. Build the image and pu
-6. `docker run -dit --env NODE_ENV=production --env-file .env.production -p 3005:3005 kingofcramers/cloture_backend:latest`
+1. `ssh -i ~/.ssh/your_public_key ubuntu@ip_address_from_terraform_apply_step`
+2. `echo "MONGODB_URI=yourconnectionstring" > .env.production`
+3. `docker run -dit --env NODE_ENV=production --env-file .env.production -p 3005:3005 your_docker_name/cloture_backend:latest`
 
 ## Environment
 
