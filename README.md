@@ -1,11 +1,6 @@
 # 🏛️ Cloture Backend
 
-This is the backend for the Cloture application.
-
-This [Apollo](https://www.apollographql.com/) server performs two functions:
-
-1. Accepts traffic and serves the static React application.
-2. Fetches data from the `MongoDB` database upon receiving GQL requests from the frontend.
+This is the backend for Cloture. It's a GraphQL API that serves up content for consumption by a frontend about congressional committee websites.
 
 ## Development
 
