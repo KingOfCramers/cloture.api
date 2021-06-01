@@ -2,3 +2,6 @@ dist
 build
 node_modules
 .env.*
+
+# Ignore terraform configuration files
+.terraform
